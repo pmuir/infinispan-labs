@@ -24,7 +24,7 @@ package org.infinispan.labs.lab1.service;
 
 import javax.inject.Qualifier;
 
-import org.infinispan.labs.lab1.Resources;
+import org.infinispan.labs.lab1.sample.addInfinispan.Resources;
 
 
 import java.lang.annotation.Documented;

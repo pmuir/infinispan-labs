@@ -1,13 +1,17 @@
 package org.infinispan.labs.lab1.model;
 
+import java.io.Serializable;
+
 /**
  * Model object which shows allocation of ticket to user
  * 
  * @author Pete Muir
  *
  */
-public class TicketAllocation {
+public class TicketAllocation implements Serializable {
    
+   private static final long serialVersionUID = 2047001724391620471L;
+
    // The name of the person the ticket is alloacted to
    private String allocatedTo;
    
@@ -35,4 +39,13 @@ public class TicketAllocation {
       this.event = eventName;
    }
 
+   public String getId() {
+      return allocatedTo + "-" + event;
+   }
+   
+   @Override
+   public String toString() {
+      return event + " allocated to " + allocatedTo;
+   }
+   
 }

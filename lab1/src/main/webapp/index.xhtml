@@ -45,31 +45,49 @@
       <div id="header">
          <h1>Infinispan Lab: Ticket Allocator</h1>
       </div>
+      
+      <div>
+         <i>Node: #{viewController.nodeId}</i>
+      </div>
 
       <div id="content">
-         <h:form prependId="false">
-            <h2><h:outputText value="Name"/></h2>
+         <h2>Allocate</h2>
+         <h:form id="allocate">
+            <h4><h:outputText value="Name"/></h4>
             <h:messages id="nameErrors" errorClass="error"/>
             <h:inputText id="name" value="#{viewController.name}" label="Name" required="true"/>
-            <h2><h:outputText value="Event"/></h2>
+            <h4><h:outputText value="Event"/></h4>
             <h:messages id="eventErrors" errorClass="error"/>
             <h:inputText id="event" value="#{viewController.eventName}" label="Event" required="true"/>
             <h:commandButton value="Allocate" action="#{viewController.allocate}">
-               <f:ajax execute="name event" render="nameErrors eventErrors numberOfAllocations allocatedTickets"/>
+               <f:ajax execute="name event" render="nameErrors eventErrors :tickets:numberOfAllocations :tickets:allocatedTickets"/>
             </h:commandButton>
             <br/>
             <br/>            
-
+         </h:form>
+         <h2>Query</h2>
+         <h:form id="query">
+            <h4><h:outputText value="Id"/></h4>
+            <h:messages id="idErrors" errorClass="error"/>
+            <h:inputText id="id" value="#{viewController.id}" label="Id" required="true"/>
+            <h:commandButton value="Query" action="#{viewController.query}">
+               <f:ajax execute="id" render="idErrors allocatedTicket"/>
+            </h:commandButton>
+            <h3>Ticket Allocation</h3>
+               <h:outputText id="allocatedTicket" value="#{viewController.allocatedTicket}" />
+            <br/>
+            <br/>     
+         </h:form>
+         <h:form id="tickets">
             <h2>
                <h:outputText id="numberOfAllocations" value="Number Of Allocations - #{numberOfAllocatedTickets}"/>
                <h:commandButton value="Refresh">
-                  <f:ajax immediate="true" render="numberOfAllocations allocatedTickets"/>
+                  <f:ajax immediate="true" render="@all"/>
                </h:commandButton>
                <h:commandButton value="Clear cache" action="#{viewController.clearAllocations}">
                   <f:ajax immediate="true" render="numberOfAllocations allocatedTickets"/>
                </h:commandButton>
             </h2>
-            
             <h:dataTable id="allocatedTickets" value="#{allocatedTickets}" var="t">
                <h:column>
                   <f:facet name="header">
@@ -82,6 +100,18 @@
                      Allocated To
                   </f:facet>
                   <h:outputText value="#{t.allocatedTo}"/>
+               </h:column>
+               <h:column>
+                  <f:facet name="header">
+                     Owners
+                  </f:facet>
+                  <h:outputText value="#{viewController.getOwners(t.id)}"/>
+               </h:column>
+               <h:column>
+                  <f:facet name="header">
+                     
+                  </f:facet>
+                  <h:commandButton value="Book" action="#{viewController.book(t.id)}" />
                </h:column>
             </h:dataTable>
          

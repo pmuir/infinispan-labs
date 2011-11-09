@@ -25,7 +25,7 @@
          resources, i.e. build is platform dependent! -->
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-      <infinispan.version>5.1.0.BETA1</infinispan.version>
+      <infinispan.version>5.1.0.BETA3</infinispan.version>
    </properties>
 
    <dependencyManagement>
@@ -51,18 +51,18 @@
 
    <dependencies>
 
-      <dependency>
-         <groupId>org.infinispan</groupId>
-         <artifactId>infinispan-core</artifactId>
-         <version>${infinispan.version}</version>
-      </dependency>
+<!--       <dependency> -->
+<!--          <groupId>org.infinispan</groupId> -->
+<!--          <artifactId>infinispan-core</artifactId> -->
+<!--          <version>${infinispan.version}</version> -->
+<!--       </dependency> -->
 
-      <!-- Infinispan dependency -->
-      <dependency>
-         <groupId>org.infinispan</groupId>
-         <artifactId>infinispan-cdi</artifactId>
-         <version>${infinispan.version}</version>
-      </dependency>
+<!--       Infinispan dependency -->
+<!--       <dependency> -->
+<!--          <groupId>org.infinispan</groupId> -->
+<!--          <artifactId>infinispan-cdi</artifactId> -->
+<!--          <version>${infinispan.version}</version> -->
+<!--       </dependency> -->
 
       <!-- Import the CDI API, we use provided scope as the API is included 
          in JBoss AS 7 -->
@@ -93,6 +93,12 @@
          <artifactId>jboss-ejb-api_3.1_spec</artifactId>
          <scope>provided</scope>
       </dependency>
+      
+<!--       <dependency> -->
+<!--          <groupId>org.jboss.spec.javax.jms</groupId> -->
+<!--          <artifactId>jboss-jms-api_1.1_spec</artifactId> -->
+<!--          <scope>provided</scope> -->
+<!--       </dependency> -->
 
    </dependencies>
 
@@ -108,11 +114,6 @@
                <!-- Java EE 6 doesn't require web.xml, Maven needs to catch 
                   up! -->
                <failOnMissingWebXml>false</failOnMissingWebXml>
-               <archive>
-                  <manifestEntries>
-                     <Dependencies>org.infinispan export</Dependencies>
-                  </manifestEntries>
-               </archive>
             </configuration>
          </plugin>
 
