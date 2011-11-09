@@ -27,7 +27,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.New;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -59,10 +61,15 @@ public class InfinispanTicketService implements TicketService {
    public void populate(TicketPopulator populator) {
       populator.populate();
    }
+   
+   @Inject
+   public void registerAbuseListener(@New AbuseListener abuseListener) {
+      tickets.addListener(abuseListener);
+   }
 
    public void allocateTicket(String allocatedTo, String event) {
       TicketAllocation allocation = new TicketAllocation(allocatedTo, event);
-      tickets.put(allocation.getId(), allocation, 10, TimeUnit.SECONDS);
+      tickets.put(allocation.getId(), allocation/*, 10, TimeUnit.SECONDS*/);
    }
 
    public List<TicketAllocation> getAllocatedTickets() {
