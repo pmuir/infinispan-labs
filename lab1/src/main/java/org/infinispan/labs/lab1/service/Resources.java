@@ -8,6 +8,7 @@ import javax.enterprise.inject.spi.InjectionPoint;
 import org.infinispan.cdi.ConfigureCache;
 import org.infinispan.config.Configuration;
 import org.infinispan.config.Configuration.CacheMode;
+import org.infinispan.labs.lab1.transactions.JBoss7TransactionManagerLookup;
 
 /**
  * Cache definitions
@@ -26,6 +27,7 @@ public class Resources {
    public Configuration configureCache() {
       return new Configuration().fluent()
             .clustering().mode(CacheMode.LOCAL)
+            .transaction().transactionManagerLookup(new JBoss7TransactionManagerLookup())
             .jmxStatistics()
             .build();
    }
