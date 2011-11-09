@@ -23,7 +23,6 @@
 package org.infinispan.labs.lab1.view;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -48,16 +47,12 @@ public class ViewController {
    // Variables populated by JSF when form is submitted
    private String name;
    private String eventName;
+   private String id;
+   private TicketAllocation allocatedTicket;
    
    @Produces @Named
    public List<TicketAllocation> getAllocatedTickets() {
-      List<TicketAllocation> result = new ArrayList<TicketAllocation>();
-      for (String event : service.getEvents()) {
-         for (TicketAllocation ticket : service.getTicketsAllocated(event)) {
-            result.add(ticket);
-         }
-      }
-      return result;
+      return service.getAllocatedTickets();
    }
    
    @Produces @Named
@@ -65,6 +60,9 @@ public class ViewController {
       return getAllocatedTickets().size();
    }
    
+   public void book(String id) {
+      service.bookTicket(id);
+   }
    
    public void allocate() {
       service.allocateTicket(name, eventName);
@@ -72,6 +70,18 @@ public class ViewController {
    
    public void clearAllocations() {
       service.clearAllocations();
+   }
+   
+   public String getNodeId() {
+      return service.getNodeId();
+   }
+   
+   public String getOwners(String key) {
+      return service.getOwners(key);
+   }
+   
+   public void query() {
+      this.allocatedTicket = service.getTicketAllocation(id);
    }
    
    public String getName() {
@@ -89,6 +99,17 @@ public class ViewController {
    public void setEventName(String event) {
       this.eventName = event;
    }
-
    
+   public String getId() {
+      return id;
+   }
+   
+   public void setId(String id) {
+      this.id = id;
+   }
+   
+   public TicketAllocation getAllocatedTicket() {
+      return allocatedTicket;
+   }
+  
 }

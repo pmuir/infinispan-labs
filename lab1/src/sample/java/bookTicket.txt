@@ -1,0 +1,47 @@
+// First impl of bookTicket, without transactions!
+
+      try {
+         Connection connection = cf.createConnection();
+         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+         MessageProducer publisher = session.createProducer(queue);
+         connection.start();
+         TextMessage message = session.createTextMessage("Book ticket for " + id);
+         publisher.send(message);
+         tickets.remove(id);
+         connection.close();
+         session.close();
+      } catch (JMSException e) {
+         throw new RuntimeException(e);
+      }
+      
+// Second impl of bookTicket, with transactions!
+      
+       XAConnection connection = null;
+       try {
+          tm.begin();
+
+          connection = cf.createXAConnection();
+          connection.start();
+
+          XASession xaSession = connection.createXASession();
+
+          MessageProducer publisher = xaSession.createProducer(queue);
+
+          TextMessage message = xaSession.createTextMessage("Book ticket for " + id);
+
+
+          //following two ops need to be atomic (XA)
+          tickets.remove(id);
+          publisher.send(message);
+
+          tm.commit();
+
+       } catch (Throwable e) {
+          throw new RuntimeException(e);
+       } finally {
+          try {
+             if (connection != null) connection.close();
+          } catch (JMSException e) {
+             e.printStackTrace();
+          }
+       }

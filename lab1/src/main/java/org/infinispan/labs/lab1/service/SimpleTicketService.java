@@ -22,12 +22,8 @@
  */
 package org.infinispan.labs.lab1.service;
 
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -37,49 +33,68 @@ import org.infinispan.labs.lab1.TicketPopulator;
 import org.infinispan.labs.lab1.model.TicketAllocation;
 
 /**
- * <p>The ticket allocator.</p>
- *
- * <p>Facade over the ticket allocation backend.</p>
- *
+ * <p>
+ * The ticket allocator.
+ * </p>
+ * 
+ * <p>
+ * Facade over the ticket allocation backend.
+ * </p>
+ * 
  * @author Pete Muir
  */
 @Named
 @ApplicationScoped
 public class SimpleTicketService implements TicketService {
 
-   private final Map<String, List<TicketAllocation>> tickets;
+   private final List<TicketAllocation> tickets = new ArrayList<TicketAllocation>();
 
-   public SimpleTicketService() {
-      this.tickets = new HashMap<String, List<TicketAllocation>>();
-   }
-   
    @Inject
    public void populate(TicketPopulator populator) {
       populator.populate();
    }
-   
+
    public void allocateTicket(String allocatedTo, String event) {
-      
-      if (this.tickets.containsKey(event)) {
-         this.tickets.get(event).add(new TicketAllocation(allocatedTo, event));
-      } else {
-         List<TicketAllocation> l = new ArrayList<TicketAllocation>();
-         l.add(new TicketAllocation(allocatedTo, event));
-         this.tickets.put(event, l);
-      }
-      
+      tickets.add(new TicketAllocation(allocatedTo, event));
    }
-   
-   public List<TicketAllocation> getTicketsAllocated(String event) {
-      return tickets.get(event);
-   }
-   
-   public Set<String> getEvents() {
-      return tickets.keySet();
+
+   public List<TicketAllocation> getAllocatedTickets() {
+      return tickets;
    }
    
    public void clearAllocations() {
       tickets.clear();
    }
    
+   public void bookTicket(String id) {
+      throw new UnsupportedOperationException();
+   }
+
+   public String getNodeId() {
+      return "local";
+   }
+
+   public String getOwners(String key) {
+      return "local";
+   }
+   
+   public TicketAllocation getTicketAllocation(String id) {
+      for (TicketAllocation allocation : tickets) {
+         if (allocation.getId().equals(id)) {
+            return allocation;
+         }
+      } 
+      return null;
+   }
+   
+   private static String asCommaSeparatedList(List<?> objects) {
+      StringBuilder builder = new StringBuilder();
+      for (int i = 0; i < objects.size(); i++) {
+         if (i != 0)
+        	 	builder.append(", ");
+         builder.append(objects.get(i));
+      }
+      return builder.toString();
+   }
+
 }
