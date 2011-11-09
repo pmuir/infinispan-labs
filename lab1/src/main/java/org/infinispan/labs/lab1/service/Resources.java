@@ -1,6 +1,9 @@
 package org.infinispan.labs.lab1.service;
 
+import java.util.logging.Logger;
+
 import javax.enterprise.inject.Produces;
+import javax.enterprise.inject.spi.InjectionPoint;
 
 import org.infinispan.cdi.ConfigureCache;
 import org.infinispan.config.Configuration;
@@ -27,6 +30,9 @@ public class Resources {
             .build();
    }
    
-   
+   @Produces
+   public Logger getLogger(InjectionPoint ip) {
+      return Logger.getLogger(ip.getMember().getDeclaringClass().getName());
+   }
    
 }
