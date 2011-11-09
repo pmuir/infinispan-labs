@@ -23,13 +23,15 @@
 package org.infinispan.labs.lab1.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.infinispan.Cache;
+import org.infinispan.config.Configuration.CacheMode;
 import org.infinispan.labs.lab1.TicketPopulator;
 import org.infinispan.labs.lab1.model.TicketAllocation;
 
@@ -46,10 +48,11 @@ import org.infinispan.labs.lab1.model.TicketAllocation;
  */
 @Named
 @ApplicationScoped
-@Alternative
-public class SimpleTicketService implements TicketService {
+public class InfinispanTicketService implements TicketService {
 
-   private final List<TicketAllocation> tickets = new ArrayList<TicketAllocation>();
+
+   @Inject @TicketAllocationCache
+   private Cache<String, TicketAllocation> tickets;
 
    @Inject
    public void populate(TicketPopulator populator) {
@@ -57,11 +60,12 @@ public class SimpleTicketService implements TicketService {
    }
 
    public void allocateTicket(String allocatedTo, String event) {
-      tickets.add(new TicketAllocation(allocatedTo, event));
+      TicketAllocation allocation = new TicketAllocation(allocatedTo, event);
+      tickets.put(allocation.getId(), allocation);
    }
 
    public List<TicketAllocation> getAllocatedTickets() {
-      return tickets;
+      return new ArrayList<TicketAllocation>(tickets.values());
    }
    
    public void clearAllocations() {
@@ -73,27 +77,29 @@ public class SimpleTicketService implements TicketService {
    }
 
    public String getNodeId() {
-      return "local";
+      if (tickets.getConfiguration().getCacheMode() != CacheMode.LOCAL)
+         return tickets.getAdvancedCache().getCacheManager().getAddress().toString();
+      else
+         return "local cache";
    }
 
    public String getOwners(String key) {
-      return "local";
+      if (tickets.getConfiguration().getCacheMode() != CacheMode.LOCAL) {
+         return asCommaSeparatedList(tickets.getAdvancedCache().getDistributionManager().locate(key));
+      } else {
+         return asCommaSeparatedList(Collections.singletonList("local"));
+      }
    }
-   
+
    public TicketAllocation getTicketAllocation(String id) {
-      for (TicketAllocation allocation : tickets) {
-         if (allocation.getId().equals(id)) {
-            return allocation;
-         }
-      } 
-      return null;
+      return tickets.get(id);
    }
-   
+
    private static String asCommaSeparatedList(List<?> objects) {
       StringBuilder builder = new StringBuilder();
       for (int i = 0; i < objects.size(); i++) {
          if (i != 0)
-        	 	builder.append(", ");
+            builder.append(", ");
          builder.append(objects.get(i));
       }
       return builder.toString();
