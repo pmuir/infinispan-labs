@@ -32,7 +32,7 @@ public class Resources {
             .clustering()
                .mode(CacheMode.DIST_SYNC)
                .l1()
-                  .disable()
+                  
             .jmxStatistics()
             .build();
    }
