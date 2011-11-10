@@ -6,8 +6,12 @@ import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 
 import org.infinispan.cdi.ConfigureCache;
+import org.infinispan.cdi.OverrideDefault;
 import org.infinispan.config.Configuration;
 import org.infinispan.config.Configuration.CacheMode;
+import org.infinispan.config.GlobalConfiguration;
+import org.infinispan.manager.DefaultCacheManager;
+import org.infinispan.manager.EmbeddedCacheManager;
 
 /**
  * Cache definitions
@@ -25,9 +29,22 @@ public class Resources {
    @Produces
    public Configuration configureCache() {
       return new Configuration().fluent()
-            .clustering().mode(CacheMode.LOCAL)
+            .clustering()
+               .mode(CacheMode.DIST_SYNC)
+               .l1()
+                  .disable()
             .jmxStatistics()
             .build();
+   }
+   
+   @Produces @OverrideDefault
+   public EmbeddedCacheManager configureCacheManager() {
+      return new DefaultCacheManager(
+            GlobalConfiguration
+               .getClusteredDefault().fluent()
+                  .transport()
+                     .addProperty("configurationFile", "jgroups.xml")
+                  .build());
    }
    
    @Produces
