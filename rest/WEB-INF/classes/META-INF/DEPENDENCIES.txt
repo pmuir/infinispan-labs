@@ -1,0 +1,86 @@
+// ------------------------------------------------------------------
+// Transitive dependencies of this project determined from the
+// maven pom organized by organization.
+// ------------------------------------------------------------------
+
+Infinispan REST Server
+
+
+From: 'an unknown organization'
+  - ON Enterprise Server JAR (http://www.urbanophile.com/arenn/hacking/download.html) gnu-getopt:getopt:jar:1.0.13
+    License: GNU Lesser General Public License (LGPL)  (http://www.gnu.org/licenses/lgpl.html)
+  - Javassist (http://www.javassist.org/) javassist:javassist:jar:3.12.1.GA
+    License: MPL 1.1  (http://www.mozilla.org/MPL/MPL-1.1.html)    License: LGPL 2.1  (http://www.gnu.org/licenses/lgpl-2.1.html)
+  - activation  javax.activation:activation:jar:1.1
+
+  - jsr250-api  javax.annotation:jsr250-api:jar:1.0
+
+  - "Java Concurrency in Practice" book annotations (http://jcip.net/) net.jcip:jcip-annotations:jar:1.0
+
+  - JAX-RS Core API (http://rest-easy.org/jaxrs-api) org.jboss.resteasy:jaxrs-api:jar:2.2.1.GA
+    License: Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0)
+  - RESTEasy JAX-RS Implementation (http://rest-easy.org/resteasy-jaxrs) org.jboss.resteasy:resteasy-jaxrs:jar:2.2.1.GA
+    License: Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0)
+  - scannotation (http://maven.apache.org) org.scannotation:scannotation:jar:1.0.3
+
+  - XML Pull Parsing API (http://www.xmlpull.org) xmlpull:xmlpull:jar:1.1.3.1
+    License: Public Domain  (http://www.xmlpull.org/v1/download/unpacked/LICENSE.txt)
+
+From: 'Apache Software Foundation' (http://www.apache.org)
+  - Apache Log4j (http://logging.apache.org/log4j/1.2/) log4j:log4j:bundle:1.2.16
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+From: 'Apache Software Foundation' (http://www.apache.org/)
+  - HttpClient (http://hc.apache.org/httpcomponents-client) org.apache.httpcomponents:httpclient:jar:4.0.3
+    License: Apache License  (../LICENSE.txt)
+  - HttpCore (http://hc.apache.org/httpcomponents-core/) org.apache.httpcomponents:httpcore:jar:4.0.1
+    License: Apache License  (http://www.apache.org/licenses/LICENSE-2.0.html)
+
+From: 'Extreme! Lab, Indiana University' (http://www.extreme.indiana.edu/)
+  - MXP1: Xml Pull Parser 3rd Edition (XPP3) (http://www.extreme.indiana.edu/xgws/xsoap/xpp/mxp1/) xpp3:xpp3_min:jar:1.1.4c
+    License: Indiana University Extreme! Lab Software License, vesion 1.1.1  (http://www.extreme.indiana.edu/viewcvs/~checkout~/XPP3/java/LICENSE.txt)    License: Public Domain  (http://creativecommons.org/licenses/publicdomain)
+
+From: 'FasterXML' (http://fasterxml.com)
+  - Jackson (http://jackson.codehaus.org) org.codehaus.jackson:jackson-core-asl:jar:1.6.1
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Data Mapper for Jackson (http://jackson.codehaus.org) org.codehaus.jackson:jackson-mapper-asl:jar:1.6.1
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+From: 'JBoss Inc.' (http://www.jboss.org)
+  - JBoss Transaction 1.0.1 API (http://www.jboss.org) org.jboss.javaee:jboss-transaction-api:jar:1.0.1.GA
+    License: lgpl  (http://repository.jboss.com/licenses/lgpl.txt)
+
+From: 'JBoss, a division of Red Hat' (http://www.jboss.org)
+  - Infinispan Core (http://www.infinispan.org/infinispan-core) org.infinispan:infinispan-core:bundle:5.1.0.BETA3
+    License: GNU Lesser General Public License  (http://www.gnu.org/copyleft/lesser.html)
+  - Infinispan Server - Core Components (http://www.infinispan.org/infinispan-server-parent/infinispan-server-core) org.infinispan:infinispan-server-core:bundle:5.1.0.BETA3
+    License: GNU Lesser General Public License  (http://www.gnu.org/copyleft/lesser.html)
+  - JGroups (http://www.jgroups.org) org.jgroups:jgroups:bundle:3.0.0.CR5
+    License: GNU Lesser General Public License 2.1  (http://www.opensource.org/licenses/lgpl-2.1.php)
+
+From: 'JBoss, a division of Red Hat, Inc.' (http://www.jboss.org)
+  - Java Annotation Indexer (http://www.jboss.org/jandex) org.jboss:jandex:jar:1.0.3.Final
+    License: lgpl  (http://repository.jboss.org/licenses/lgpl-2.1.txt)
+  - JBoss Logging 3 (http://www.jboss.org) org.jboss.logging:jboss-logging:jar:3.1.0.Beta3
+    License: GNU Lesser General Public License, version 2.1  (http://www.gnu.org/licenses/lgpl-2.1.txt)
+  - JBoss Marshalling API (http://www.jboss.org/jboss-marshalling-parent/jboss-marshalling) org.jboss.marshalling:jboss-marshalling:jar:1.3.0.GA
+    License: lgpl  (http://repository.jboss.org/licenses/lgpl-2.1.txt)
+  - JBoss Marshalling River (http://www.jboss.org/jboss-marshalling-parent/jboss-marshalling-river) org.jboss.marshalling:jboss-marshalling-river:jar:1.3.0.GA
+    License: lgpl  (http://repository.jboss.org/licenses/lgpl-2.1.txt)
+  - The Netty Project (http://www.jboss.org/netty/) org.jboss.netty:netty:bundle:3.2.4.Final
+    License: Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0)
+
+From: 'LAMP/EPFL' (http://lamp.epfl.ch/)
+  - scala-library (http://www.scala-lang.org/) org.scala-lang:scala-library:jar:2.9.1
+    License: BSD-like  (http://www.scala-lang.org/downloads/license.html)
+
+From: 'Red Hat, Inc.' (http://redhat.com/)
+  - RHQ plugin annotations (http://rhq-project.org/rhq-pluginAnnotations/) org.rhq.helpers:rhq-pluginAnnotations:jar:3.0.1
+
+
+From: 'XStream' (http://xstream.codehaus.org)
+  - XStream Core (http://codehaus.org/xstream-parent/xstream/) com.thoughtworks.xstream:xstream:jar:1.4.1
+    License: BSD style  (http://xstream.codehaus.com/license.html)
+
+
+
