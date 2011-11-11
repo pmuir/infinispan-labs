@@ -65,11 +65,11 @@
       </dependency>
 
 <!-- Infinispan Cache Store -->
-<!--       <dependency> -->
-<!--          <groupId>org.infinispan</groupId> -->
-<!--          <artifactId>infinispan-cachestore-jdbc</artifactId> -->
-<!--          <version>${infinispan.version}</version> -->
-<!--       </dependency> -->
+      <dependency>
+         <groupId>org.infinispan</groupId>
+         <artifactId>infinispan-cachestore-jdbc</artifactId>
+         <version>${infinispan.version}</version>
+      </dependency>
 
       <!-- Import the CDI API, we use provided scope as the API is included 
          in JBoss AS 7 -->
